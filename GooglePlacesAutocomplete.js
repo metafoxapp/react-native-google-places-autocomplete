@@ -92,12 +92,12 @@ export const GooglePlacesAutocomplete = forwardRef((props, ref) => {
         ...props.predefinedPlaces.filter((place) => place?.description.length),
       ];
 
-      if (props.currentLocation === true && hasNavigator()) {
-        res.unshift({
-          description: props.currentLocationLabel,
-          isCurrentLocation: true,
-        });
-      }
+      // if (props.currentLocation === true && hasNavigator()) {
+      //   res.unshift({
+      //     description: props.currentLocationLabel,
+      //     isCurrentLocation: true,
+      //   });
+      // }
     }
 
     res = res.map((place) => ({
