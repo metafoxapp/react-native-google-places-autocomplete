@@ -493,15 +493,15 @@ export const GooglePlacesAutocomplete = forwardRef((props, ref) => {
 
         if (request.status === 200) {
           const responseJSON = JSON.parse(request.responseText);
-          if (typeof responseJSON.predictions !== 'undefined') {
+          if (typeof responseJSON.results !== 'undefined') {
             // if (_isMounted === true) {
             const results =
               props.nearbyPlacesAPI === 'GoogleReverseGeocoding'
                 ? _filterResultsByTypes(
-                    responseJSON.predictions,
+                    responseJSON.results,
                     props.filterReverseGeocodingByTypes,
                   )
-                : responseJSON.predictions;
+                : responseJSON.results;
 
             _results = results;
             setDataSource(buildRowsFromResults(results));
@@ -527,7 +527,7 @@ export const GooglePlacesAutocomplete = forwardRef((props, ref) => {
 
       request.open(
         'GET',
-        `${url}/place/autocomplete/json?input=` +
+        `${url}/place/textsearch/json?query=` +
           encodeURIComponent(text) +
           '&' +
           Qs.stringify(props.query),
@@ -913,8 +913,7 @@ GooglePlacesAutocomplete.defaultProps = {
   filterReverseGeocodingByTypes: [],
   GooglePlacesDetailsQuery: {},
   GooglePlacesSearchQuery: {
-    rankby: 'distance',
-    type: 'restaurant',
+    rankby: 'distance'
   },
   GoogleReverseGeocodingQuery: {},
   isRowScrollable: true,
